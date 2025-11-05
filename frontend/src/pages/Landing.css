@@ -1,0 +1,269 @@
+/* Base layout */
+:root {
+  --bg: #f5f8fb;
+  --text: #2c3e50;
+  --muted: #555;
+  --card: #ffffff;
+  --ring: #e6eef5;
+  --brand: #3498db;
+  --brand-hover: #2980b9;
+}
+
+* { box-sizing: border-box; }
+
+body { margin: 0; }
+
+.landing-wrap {
+  min-height: 100vh;
+  background: var(--bg);
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Hero */
+.landing-hero {
+  width: 100%;
+  max-width: 1100px;
+  text-align: center;
+  margin: 24px auto 8px;
+  padding: 0 8px;
+}
+
+.landing-title {
+  margin: 0 0 8px;
+  color: var(--text);
+  font-weight: 800;
+  line-height: 1.15;
+  font-size: clamp(28px, 4vw, 44px);
+}
+
+.landing-subtitle {
+  margin: 0 auto;
+  color: var(--muted);
+  font-size: clamp(14px, 1.8vw, 18px);
+  max-width: 820px;
+}
+
+/* Grid that becomes two columns on desktop */
+.landing-grid {
+  width: 100%;
+  max-width: 1100px;
+  margin: 24px auto 0;
+  display: grid;
+  gap: 16px;
+  grid-template-columns: 1fr; /* mobile default */
+  padding: 0 8px;
+}
+
+/* Cards */
+.card {
+  background: var(--card);
+  border: 1px solid var(--ring);
+  border-radius: 14px;
+  padding: 18px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.04);
+}
+
+.card h2 {
+  margin: 0 0 10px;
+  color: var(--text);
+  font-size: clamp(18px, 2.2vw, 22px);
+}
+
+.card p {
+  margin: 0;
+  color: #444;
+  font-size: clamp(14px, 1.7vw, 16px);
+}
+
+/* Lists */
+.list {
+  margin: 8px 0 0;
+  padding-left: 18px;
+  color: #444;
+  font-size: clamp(14px, 1.7vw, 16px);
+}
+
+.list.ordered {
+  list-style: decimal;
+}
+
+.list li {
+  margin: 6px 0;
+}
+
+/* CTA */
+.cta {
+  width: 100%;
+  max-width: 1100px;
+  display: flex;
+  justify-content: center;
+  padding: 24px 8px 40px;
+}
+
+.btn {
+  background: var(--brand);
+  margin-right: 20px;
+  color: #fff;
+  border: none;
+  padding: 12px 22px;
+  border-radius: 10px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: transform .08s ease, background .2s ease;
+}
+.btn:hover { background: var(--brand-hover); }
+.btn:active { transform: translateY(1px); }
+
+/* —— Responsive breakpoints —— */
+
+/* Tablet: widen grid, tighten spacing */
+@media (min-width: 768px) {
+  .landing-grid {
+    gap: 18px;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* Desktop: breathing space, bigger cards */
+@media (min-width: 1024px) {
+  .landing-wrap { padding: 40px; }
+  .landing-grid { gap: 20px; }
+  .card { padding: 22px; }
+}
+
+/* Large desktop: keep content centered and readable */
+@media (min-width: 1400px) {
+  .landing-hero, .landing-grid, .cta { max-width: 1180px; }
+}
+
+/* existing styles … */
+
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.6); /* slate-900/60 */
+  display: grid;
+  place-items: center;
+  padding: 16px;
+  z-index: 1000;
+}
+
+.modal-card {
+  width: 100%;
+  max-width: 720px;
+
+  height: 100%;
+
+  background: #fff;
+  border-radius: 14px;
+  box-shadow: 0 10px 30px rgba(0,0,0,.2);
+  overflow: hidden;
+  animation: modalIn 160ms ease-out;
+}
+
+@keyframes modalIn {
+  from { transform: translateY(8px); opacity: 0; }
+  to   { transform: translateY(0); opacity: 1; }
+}
+
+.modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 18px;
+  border-bottom: 1px solid #eee;
+}
+
+.modal-title {
+  margin: 0;
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: #111827;
+}
+
+.modal-close {
+  border: none;
+  background: transparent;
+  font-size: 1.5rem;
+  line-height: 1;
+  cursor: pointer;
+  color: #6b7280;
+}
+
+.modal-close:hover { color: #111827; }
+
+.modal-body {
+  padding: 16px 18px;
+  color: #374151;
+}
+
+.modal-body h3 {
+  margin: 16px 0 6px;
+  font-size: 1rem;
+  color: #111827;
+}
+
+.modal-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  padding: 12px 18px 16px;
+  border-top: 1px solid #eee;
+}
+
+/* Keep your existing .btn / .secondary styles */
+/* Keep your existing variables, layout, cards, lists, CTA, breakpoints … */
+
+/* Secondary button look (optional) */
+.btn.secondary {
+  background: #eef5fb;
+  color: var(--brand);
+  border: 1px solid var(--ring);
+}
+.btn.secondary:hover { background: #e7f0f9; }
+
+/* Inline expandable section */
+.extra {
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  padding: 0 18px;         /* collapse padding until open */
+  border-width: 0;         /* hide border until open */
+  transition:
+    max-height 320ms ease,
+    opacity 220ms ease,
+    padding 220ms ease,
+    border-width 0ms linear 220ms; /* add border after fade-in */
+  margin-top: 0;
+}
+
+.extra.open {
+  border: 1px solid var(--ring);
+  border-radius: 14px;
+  padding: 18px;
+  margin-top: 8px;
+  opacity: 1;
+  max-height: 1400px;      /* enough space for content; adjust if you add more */
+  transition:
+    max-height 420ms ease,
+    opacity 260ms ease,
+    padding 220ms ease,
+    border-width 0ms;
+}
+
+/* divider */
+.hr {
+  height: 1px;
+  background: #eee;
+  margin: 14px 0;
+}
+
+/* Accessibility: respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .extra, .extra.open {
+    transition: none;
+  }
+}
